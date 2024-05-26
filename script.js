@@ -1,6 +1,8 @@
 const inputText = document.querySelector("#userInput");
 const textSource = document.querySelector(".source");
-const text = "Yesterday, you said tommorow. Just do it.";
+const timee = document.querySelector(".timer");
+// const text = "Yesterday, you said tommorow. Just do it.";
+const text = "foo bar";
 
 inputText.value = "";
 
@@ -8,6 +10,10 @@ let sourceIndex = 0; // this is for the word
 let cursorIndex = 0;
 const textWords = text.split(" ");
 const count = textWords.length;
+// states = notStarted , playing, end
+let gameState = "notStarted";
+let startTime = undefined;
+let timerStarted = false;
 
 // textSource.innerHTML = "Yesterday, you said tommorow. Just do it.";
 function renderText() {
@@ -30,6 +36,7 @@ renderText();
 inputText.addEventListener("input", handleUserInput);
 
 function handleUserInput(e) {
+	startHandleTime();
 	renderText();
 	let currSrc = textWords[sourceIndex] ?? "";
 	let currInput = inputText.value.split(" ")[0];
@@ -58,16 +65,27 @@ function handleUserInput(e) {
 	} else if (e.inputType === "deleteContentBackward") {
 	}
 }
+function startHandleTime() {
+	if (!timerStarted) {
+		timerStarted = true;
+		startTime = new Date();
+		console.log("started at " + startTime);
+		handleTime();
+	}
+}
 
-// function handleCursor() {
-// 	const currSrc = textWords[sourceIndex];
-// 	const currInput = inputText.value.split(" ")[0];
-
-// 	let temp = currSrc.slice(0, currInput.length);
-// 	console.log(temp);
-// 	console.log(currInput);
-// 	console.log(temp === currInput);
-// 	if (temp === currInput && temp !== "") {
-// 		cursorIndex++;
-// 	}
-// }
+function handleTime() {
+	if (cursorIndex >= count) {
+		const endTime = new Date();
+		const timeTaken = (endTime - startTime) / 1000;
+		console.log("whooooo, game sakyo");
+		console.log(endTime);
+		console.log(timeTaken);
+		const wpm = Math.floor((count / timeTaken) * 60);
+		timee.innerHTML = `Time: ${timeTaken} wps: ${wpm}`;
+		return;
+	}
+	setTimeout(() => {
+		handleTime();
+	}, 100);
+}
