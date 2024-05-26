@@ -79,8 +79,8 @@ function handleTime() {
 		const endTime = new Date();
 		const timeTaken = (endTime - startTime) / 1000;
 		console.log("whooooo, game sakyo");
-		console.log(endTime);
-		console.log(timeTaken);
+		// console.log(endTime);
+		// console.log(timeTaken);
 		const wpm = Math.floor((count / timeTaken) * 60);
 		timee.innerHTML = `Time: ${timeTaken} wps: ${wpm}`;
 		return;
