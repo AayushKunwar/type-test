@@ -1,0 +1,39 @@
+body {
+	max-width: 330px;
+	margin: 0 auto;
+	background-color: #181818;
+	color: antiquewhite;
+}
+.timer {
+	width: 100%;
+	text-align: center;
+}
+.p {
+	padding: 1rem;
+}
+.box {
+	border: 1px solid antiquewhite;
+	padding: 2rem;
+}
+input {
+	color: #181818;
+}
+.text-center {
+	text-align: center;
+}
+.current {
+	background-color: khaki;
+	color: #181818;
+	/* border-left: 1px solid yellow; */
+}
+.error1 {
+	background-color: red;
+	color: #181818;
+	text-decoration: underline;
+	/* background-color: green; */
+	/* border: 1px solid blue; */
+}
+.inline {
+	display: inline-block;
+	margin: 0 2px 0 2px;
+}
