@@ -39,6 +39,9 @@ function renderText() {
 		if (index === cursorIndex) {
 			temp.classList.add("current");
 		}
+		// else if (index < cursorIndex) {
+		// 	temp.classList.add("correct");
+		// }
 		temp.innerHTML = ch + " ";
 		textSource.appendChild(temp);
 		// console.log(temp);
@@ -59,6 +62,10 @@ function resetEverything() {
 	inputText.value = "";
 	inputText.focus();
 }
+function handleRedo() {
+	text = getWords(selectedLength);
+	resetEverything();
+}
 
 function setLength(len, ref) {
 	selectedLength = len;
@@ -76,6 +83,7 @@ function handleUserInput(e) {
 	renderText();
 	let currSrc = textWords[sourceIndex] ?? "";
 	let currInput = inputText.value.split(" ")[0];
+	// design flaw?
 	if (e.data === " ") {
 		if (currSrc === currInput) {
 			// console.log("success");
@@ -110,7 +118,7 @@ function handleTime() {
 	if (cursorIndex >= count) {
 		const endTime = new Date();
 		const timeTaken = (endTime - startTime) / 1000;
-		console.log("whooooo, game sakyo");
+		// console.log("whooooo, game sakyo");
 		// console.log(endTime);
 		// console.log(timeTaken);
 		const wpm = Math.floor((count / timeTaken) * 60);
