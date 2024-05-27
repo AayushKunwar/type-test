@@ -3,8 +3,9 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
 		<link rel="stylesheet" href="style.css" />
+		<script defer src="words.js"></script>
 		<script defer src="script.js"></script>
 		<title>Type Testing</title>
 	</head>
@@ -13,9 +14,19 @@
 			<h1 class="text-center">Typing Test</h1>
 		</header>
 		<main class="box">
-			<h3 class="timer">Time: 0 wps: 0</h3>
+			<div class="container">
+				<a class="selection" onclick="setLength(10)">15</a>
+				<a class="selection" onclick="setLength(25)">30</a>
+				<a class="selection" onclick="setLength(50)">50</a>
+				<a class="selection" onclick="setLength(50)">quote</a>
+			</div>
+			<div class="stats">Time: <span class="timer">XX</span>s</div>
+            <div class="stats">wps: <span class="wps">XX</span></div>
 			<div class="source"></div>
-			<input type="text" name="input" id="userInput" autofocus></input>
+   <div class="container">
+       <input type="text" class="" name="input" id="userInput" autofocus></input>
+       <button class="btn" onclick="resetEverything()">Redo</button>
+   </div>
 		</main>
 	</body>
 </html>
