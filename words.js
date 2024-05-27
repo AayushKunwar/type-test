@@ -118,10 +118,14 @@ function getWords(length) {
 		return commonEnglishWords.slice();
 	}
 	let result = [];
+	let prev = "";
 	// if repeated words then dont care
 	while (result.length < length) {
 		let rndIdx = Math.floor(Math.random() * commonEnglishWords.length);
-		result.push(commonEnglishWords[rndIdx]);
+		if (commonEnglishWords[rndIdx] !== prev) {
+			result.push(commonEnglishWords[rndIdx]);
+			prev = commonEnglishWords[rndIdx];
+		}
 	}
 	return result.join(" ");
 }

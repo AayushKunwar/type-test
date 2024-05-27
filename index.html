@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
 		<link rel="stylesheet" href="style.css" />
 		<script defer src="words.js"></script>
+		<script defer src="quote.js"></script>
 		<script defer src="script.js"></script>
 		<title>Type Testing</title>
 	</head>
@@ -14,14 +15,14 @@
 			<h1 class="text-center">Typing Test</h1>
 		</header>
 		<main class="box">
-			<div class="container">
-				<a class="selection" onclick="setLength(10)">15</a>
-				<a class="selection" onclick="setLength(25)">30</a>
-				<a class="selection" onclick="setLength(50)">50</a>
-				<a class="selection" onclick="setLength(50)">quote</a>
+			<div class="container selections">
+				<a class="selection" onclick="setLength(10, this)">15</a>
+				<a class="selection" onclick="setLength(25, this)">30</a>
+				<a class="selection" onclick="setLength(50, this)">50</a>
+				<a class="selection" onclick="getQuote(this)">quote</a>
 			</div>
 			<div class="stats">Time: <span class="timer">XX</span>s</div>
-            <div class="stats">wps: <span class="wps">XX</span></div>
+            <div class="stats">wpm: <span class="wpm">XX</span></div>
 			<div class="source"></div>
    <div class="container">
        <input type="text" class="" name="input" id="userInput" autofocus></input>

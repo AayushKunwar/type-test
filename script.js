@@ -1,25 +1,33 @@
 const inputText = document.querySelector("#userInput");
 const textSource = document.querySelector(".source");
 const timee = document.querySelector(".timer");
-const wpss = document.querySelector(".wps");
+const wpss = document.querySelector(".wpm");
+const selections = document.querySelector(".selections");
 // const text = "Yesterday, you said tommorow. Just do it.";
 // let text = "foo bar baz buzz eggs omelet";
+
+let sourceIndex = 0; // this is for the word
+let cursorIndex = 0;
+
 let selectedLength = 15;
 let text = getWords(selectedLength);
+let textWords = text.split(" ");
 // console.log(text);
 
 inputText.value = "";
 
-let sourceIndex = 0; // this is for the word
-let cursorIndex = 0;
-let textWords = text.split(" ");
 let count = textWords.length;
 // states = notStarted , playing, end
 let gameState = "notStarted";
 let startTime = undefined;
 let timerStarted = false;
 
+setLength(15, selections.children[0]);
 // textSource.innerHTML = "Yesterday, you said tommorow. Just do it.";
+
+renderText();
+inputText.addEventListener("input", handleUserInput);
+
 function renderText() {
 	textSource.innerHTML = "";
 	// ch now means word
@@ -36,10 +44,6 @@ function renderText() {
 		// console.log(temp);
 	});
 }
-
-renderText();
-inputText.addEventListener("input", handleUserInput);
-
 function resetEverything() {
 	sourceIndex = 0; // this is for the word
 	cursorIndex = 0;
@@ -49,15 +53,21 @@ function resetEverything() {
 	gameState = "notStarted";
 	startTime = undefined;
 	timerStarted = false;
-	text = getWords(selectedLength);
+	// text = getWords(selectedLength);
 	textWords = text.split(" ");
 	renderText();
 	inputText.value = "";
 	inputText.focus();
 }
 
-function setLength(len) {
+function setLength(len, ref) {
 	selectedLength = len;
+	console.log(ref);
+	for (let child of selections.children) {
+		child.classList.remove("selection_active");
+	}
+	ref.classList.add("selection_active");
+	text = getWords(selectedLength);
 	resetEverything();
 }
 
@@ -66,29 +76,25 @@ function handleUserInput(e) {
 	renderText();
 	let currSrc = textWords[sourceIndex] ?? "";
 	let currInput = inputText.value.split(" ")[0];
-	// console.log(currSrc.slice(0, currInput.length));
-	// console.log(currInput);
-	// console.log(e);
-	if (e.inputType === "insertText") {
-		// console.log(textWords[sourceIndex]);
-		// console.log(inputText.value);
-		if (e.data === " ") {
-			if (currSrc === currInput) {
-				// console.log("success");
-				sourceIndex++;
-				inputText.value = "";
-				cursorIndex++;
-				renderText();
-				return;
-			}
-		} else if (currSrc.slice(0, currInput.length) === currInput) {
-			// console.log("progress");
-		} else {
-			textSource.childNodes[sourceIndex].classList.add("error1");
-			textSource.childNodes[sourceIndex].classList.remove("current");
-			// console.log(textSource.childNodes[cursorIndex]);
+	if (e.data === " ") {
+		if (currSrc === currInput) {
+			// console.log("success");
+			sourceIndex++;
+			inputText.value = "";
+			cursorIndex++;
+			renderText();
+			return;
 		}
-	} else if (e.inputType === "deleteContentBackward") {
+	} else if (
+		currSrc.slice(0, currInput.length) === currInput &&
+		currSrc.length >= currInput.length
+	) {
+		// console.log("progress");
+		return;
+	} else {
+		textSource.childNodes[sourceIndex].classList.add("error1");
+		textSource.childNodes[sourceIndex].classList.remove("current");
+		// console.log(textSource.childNodes[cursorIndex]);
 	}
 }
 function startHandleTime() {
@@ -115,4 +121,12 @@ function handleTime() {
 	setTimeout(() => {
 		handleTime();
 	}, 100);
+}
+
+function getQuote(ref) {
+	for (let child of selections.children) {
+		child.classList.remove("selection_active");
+	}
+	ref.classList.add("selection_active");
+	getNextQuote();
 }
