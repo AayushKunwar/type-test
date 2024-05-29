@@ -1,5 +1,4 @@
 body {
-	max-width: 600px;
 	margin: 0 auto;
 	background-color: #181818;
 	color: antiquewhite;
@@ -45,6 +44,8 @@ input {
 	padding: 2rem;
 	margin: 2rem;
 	border-radius: 5px;
+	max-width: 700px;
+	width: 615px;
 }
 .text-center {
 	text-align: center;
