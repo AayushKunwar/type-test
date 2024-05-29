@@ -9,7 +9,7 @@ const selections = document.querySelector(".selections");
 let sourceIndex = 0; // this is for the word
 let cursorIndex = 0;
 
-let selectedLength = 15;
+let selectedLength = 10;
 let text = getWords(selectedLength);
 let textWords = text.split(" ");
 // console.log(text);
@@ -22,8 +22,7 @@ let gameState = "notStarted";
 let startTime = undefined;
 let timerStarted = false;
 
-setLength(15, selections.children[0]);
-// textSource.innerHTML = "Yesterday, you said tommorow. Just do it.";
+setLength(selectedLength, selections.children[0]);
 
 renderText();
 inputText.addEventListener("input", handleUserInput);
@@ -42,7 +41,7 @@ function renderText() {
 		// else if (index < cursorIndex) {
 		// 	temp.classList.add("correct");
 		// }
-		temp.innerHTML = ch + " ";
+		temp.innerHTML = ch;
 		textSource.appendChild(temp);
 		// console.log(temp);
 	});
@@ -128,7 +127,7 @@ function handleTime() {
 	}
 	setTimeout(() => {
 		handleTime();
-	}, 100);
+	}, 50);
 }
 
 function getQuote(ref) {

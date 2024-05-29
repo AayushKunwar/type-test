@@ -64,7 +64,7 @@ input {
 }
 .inline {
 	display: inline-block;
-	margin: 0 2px 0 2px;
+	padding: 0 2px;
 }
 .stats {
 	font-weight: 600;
